@@ -1,70 +1,69 @@
 <template>
   <div class="projects">
-    <el-row :gutter="20" class="mt-4">
-      <el-col :span="24">
-        <h1 class="text-center mb-4">My Projects</h1>
-      </el-col>
-      <el-col :span="24">
-        <el-tabs type="border-card">
-          <el-tab-pane label="Featured Projects">
-            <el-row :gutter="20">
-              <el-col :span="8" v-for="project in featuredProjects" :key="project.id">
-                <el-card>
-                  <template #header>
-                    <div class="card-header">
-                      <span>{{ project.title }}</span>
-                      <el-tag type="success" class="ml-2">{{ project.tech }}</el-tag>
-                    </div>
-                  </template>
-                  <div class="text item">
-                    <p>{{ project.description }}</p>
-                    <div class="project-links mt-2">
-                      <el-button type="text" @click="openLink(project.demo)" v-if="project.demo">
-                        <el-icon><Link /></el-icon> Live Demo
-                      </el-button>
-                      <el-button type="text" @click="openLink(project.code)" v-if="project.code">
-                        <el-icon><Link /></el-icon> Source Code
-                      </el-button>
-                    </div>
-                  </div>
-                </el-card>
-              </el-col>
-            </el-row>
-          </el-tab-pane>
-          <el-tab-pane label="All Projects">
-            <el-row :gutter="20">
-              <el-col :span="8" v-for="project in allProjects" :key="project.id">
-                <el-card>
-                  <template #header>
-                    <div class="card-header">
-                      <span>{{ project.title }}</span>
-                      <el-tag type="success" class="ml-2">{{ project.tech }}</el-tag>
-                    </div>
-                  </template>
-                  <div class="text item">
-                    <p>{{ project.description }}</p>
-                    <div class="project-links mt-2">
-                      <el-button type="text" @click="openLink(project.demo)" v-if="project.demo">
-                        <el-icon><Link /></el-icon> Live Demo
-                      </el-button>
-                      <el-button type="text" @click="openLink(project.code)" v-if="project.code">
-                        <el-icon><Link /></el-icon> Source Code
-                      </el-button>
-                    </div>
-                  </div>
-                </el-card>
-              </el-col>
-            </el-row>
-          </el-tab-pane>
-        </el-tabs>
-      </el-col>
-    </el-row>
+    <div class="max-w-7xl mx-auto px-4">
+      <h1 class="text-3xl font-bold text-center mb-8">My Projects</h1>
+      
+      <div class="tabs">
+        <div class="tab-content">
+          <div class="featured-projects">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div v-for="project in featuredProjects" :key="project.id" class="project-card">
+                <div class="card-header flex justify-between items-center mb-4">
+                  <h3 class="text-xl font-semibold">{{ project.title }}</h3>
+                  <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm">{{ project.tech }}</span>
+                </div>
+                <p class="text-gray-600 mb-4">{{ project.description }}</p>
+                <div class="flex gap-4">
+                  <button v-if="project.demo" @click="openLink(project.demo)" class="text-blue-600 hover:text-blue-800 flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                    </svg>
+                    Live Demo
+                  </button>
+                  <button v-if="project.code" @click="openLink(project.code)" class="text-blue-600 hover:text-blue-800 flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                    </svg>
+                    Source Code
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="all-projects">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div v-for="project in allProjects" :key="project.id" class="project-card">
+                <div class="card-header flex justify-between items-center mb-4">
+                  <h3 class="text-xl font-semibold">{{ project.title }}</h3>
+                  <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm">{{ project.tech }}</span>
+                </div>
+                <p class="text-gray-600 mb-4">{{ project.description }}</p>
+                <div class="flex gap-4">
+                  <button v-if="project.demo" @click="openLink(project.demo)" class="text-blue-600 hover:text-blue-800 flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                    </svg>
+                    Live Demo
+                  </button>
+                  <button v-if="project.code" @click="openLink(project.code)" class="text-blue-600 hover:text-blue-800 flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                    </svg>
+                    Source Code
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { Link } from '@element-plus/icons-vue'
 
 const featuredProjects = ref([
   {
@@ -118,9 +117,4 @@ const openLink = (url) => {
 }
 </script>
 
-<style scoped>
-.project-links {
-  display: flex;
-  gap: 1rem;
-}
-</style>
+
