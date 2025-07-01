@@ -1,27 +1,38 @@
 <template>
-  <nav class="header">
-    <div class="nav-wrapper">
-      <div class="logo">
-        <router-link to="/" class="logo-link">
-          <h1>Portfolio</h1>
-        </router-link>
-      </div>
-      <div class="nav-links">
-        <router-link to="/" class="nav-item">Home</router-link>
-        <router-link to="/about" class="nav-item">About</router-link>
-        <router-link to="/projects" class="nav-item">Projects</router-link>
-        <router-link to="/contact" class="nav-item">Contact</router-link>
-      </div>
-      <div class="mobile-menu" @click="toggleMobileMenu">
-        <span v-if="!isMobileMenuOpen" class="menu-icon">☰</span>
-        <span v-else class="close-icon">×</span>
+  <nav class="fixed w-full bg-white shadow-sm z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex">
+          <router-link to="/" class="flex items-center">
+            <h1 class="text-xl font-bold text-gray-900">Portfolio</h1>
+          </router-link>
+        </div>
+        <div class="hidden sm:flex items-center space-x-8">
+          <router-link to="/" class="text-gray-600 hover:text-blue-600 transition-colors">Home</router-link>
+          <router-link to="/about" class="text-gray-600 hover:text-blue-600 transition-colors">About</router-link>
+          <router-link to="/projects" class="text-gray-600 hover:text-blue-600 transition-colors">Projects</router-link>
+          <router-link to="/contact" class="text-gray-600 hover:text-blue-600 transition-colors">Contact</router-link>
+        </div>
+        <div class="flex items-center sm:hidden">
+          <button @click="toggleMobileMenu" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
+            <svg v-if="!isMobileMenuOpen" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg v-else class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
-    <div v-if="isMobileMenuOpen" class="mobile-nav-links">
-      <router-link to="/" class="nav-item" @click="toggleMobileMenu">Home</router-link>
-      <router-link to="/about" class="nav-item" @click="toggleMobileMenu">About</router-link>
-      <router-link to="/projects" class="nav-item" @click="toggleMobileMenu">Projects</router-link>
-      <router-link to="/contact" class="nav-item" @click="toggleMobileMenu">Contact</router-link>
+
+    <div v-if="isMobileMenuOpen" class="sm:hidden">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <router-link to="/" @click="toggleMobileMenu" class="block px-3 py-2 text-gray-600 hover:text-blue-600 transition-colors">Home</router-link>
+        <router-link to="/about" @click="toggleMobileMenu" class="block px-3 py-2 text-gray-600 hover:text-blue-600 transition-colors">About</router-link>
+        <router-link to="/projects" @click="toggleMobileMenu" class="block px-3 py-2 text-gray-600 hover:text-blue-600 transition-colors">Projects</router-link>
+        <router-link to="/contact" @click="toggleMobileMenu" class="block px-3 py-2 text-gray-600 hover:text-blue-600 transition-colors">Contact</router-link>
+      </div>
     </div>
   </nav>
 </template>
@@ -42,83 +53,3 @@ router.afterEach(() => {
   isMobileMenuOpen.value = false
 })
 </script>
-
-<style scoped>
-.header {
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-  padding: 1rem 2rem;
-}
-
-.nav-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-.logo-link {
-  text-decoration: none;
-  color: #2c3e50;
-}
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-}
-
-.nav-item {
-  text-decoration: none;
-  color: #2c3e50;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.nav-item:hover {
-  color: #3498db;
-}
-
-.mobile-menu {
-  display: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.mobile-nav-links {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-  
-  .mobile-menu {
-    display: block;
-  }
-  
-  .mobile-nav-links {
-    display: flex;
-  }
-}
-</style>
